@@ -13,7 +13,7 @@ class DimensionButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Image.asset(imagePath),
+      child: Image.asset(imagePath,fit: BoxFit.contain,),
     )
     );
   }
