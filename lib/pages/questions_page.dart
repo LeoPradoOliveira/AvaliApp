@@ -50,7 +50,11 @@ class QuestionsPage extends StatelessWidget {
                                       shape: BoxShape.circle,
                                       color: Colors.green,
                                     ),
-                                    child: CircleAvatar(backgroundImage: NetworkImage(userData['Foto']),radius: 55,),
+                                    child: CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(userData['Foto']),
+                                      radius: 55,
+                                    ),
                                   ),
                                 ),
                                 Flexible(
@@ -134,37 +138,40 @@ class QuestionsPage extends StatelessWidget {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("ambiente",index)),
+          MaterialPageRoute(builder: (context) => QuizPage("Ambiente", index)),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("cuidado",index)),
+          MaterialPageRoute(builder: (context) => QuizPage("Cuidado", index)),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("lar",index)),
+          MaterialPageRoute(builder: (context) => QuizPage("Lar", index)),
         );
         break;
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("gestão da ILPI",index)),
+          MaterialPageRoute(
+              builder: (context) => QuizPage("Gestão da ILPI", index)),
         );
         break;
       case 4:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("equipe de trabalho",index)),
+          MaterialPageRoute(
+              builder: (context) => QuizPage("Equipe de Trabalho", index)),
         );
         break;
       case 5:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizPage("envolvimento familiar",index)),
+          MaterialPageRoute(
+              builder: (context) => QuizPage("Envolvimento Familiar", index)),
         );
         break;
       default:

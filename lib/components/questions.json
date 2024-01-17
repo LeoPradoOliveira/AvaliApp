@@ -1,10 +1,10 @@
 {
   "dimensões": [
     {
-      "ambiente": {
+      "Ambiente": {
         "perguntas": [
           {
-            "enunciado": "A ILPI possui:\n1- barras de apoio nos quartos;\n2- banheiros adaptados;\n3- portas com largura mínima de 80 cm;\n4- piso antiderrapante em seu ambiente, interno e externo;\n5- rampas ou elevador, ao invés de escadas;\n6- corrimões;\n7- ambientes livres de obstruções;\n8- dormitórios dotados de luz de vigília;\n9- campainha de alarme;\n10- área para guarda de roupas e pertences dos residentes;\n11- extintores com data de validade adequada, sirenes, vias de escape, escada de incêndio, porta resistente ao fogo, existência de placas de sinalização, luzes indicadoras.",
+            "enunciado": "A ILPI possui:\n1- barras de apoio nos quartos;\n2- banheiros adaptados;\n3- portas com largura mínima de 80 cm;\n4- piso antiderrapante em seu ambiente, interno e externo;\n5- rampas ou elevador, ao invés de escadas;\n6- corrimões;\n7- ambientes livres de obstruções;\n8- dormitórios dotados de luz de vigília;\n9- campainha de alarme;\n10- área para guarda de roupas e pertences dos residentes;\n11- extintores, sirenes, vias de escape, escada de incêndio, porta resistente ao fogo, placas de sinalização, luzes indicadoras.",
             "respostas": [
               "Inexistente, a ILPI não apresenta nenhum dos itens definidos pelo padrão",
               "Incipiente, de 1 a 3 itens e é necessário muito esforço para alcançar o padrão de qualidade",
@@ -50,7 +50,7 @@
       }
     },
     {
-      "cuidado": {
+      "Cuidado": {
         "perguntas": [
           {
             "enunciado": "A ILPI oferece as refeições diárias necessárias: café, lanche, almoço, lanche da tarde, jantar e lanche antes de dormir. O cardápio das refeições é definido por um profissional nutricionista e é diversificado, levando em conta, além das restrições de cada idoso, a estação do ano, os aspectos culturais locais e os desejos dos idosos, considerando sua condição de saúde.",
@@ -124,7 +124,7 @@
       }
     },
     {
-      "lar": {
+      "Lar": {
         "perguntas": [
           {
             "enunciado": "A ILPI favorece o desenvolvimento de atividades conjuntas, promovendo a interação das pessoas idosas, por meio de parcerias, de forma voluntária ou não, com pessoas de outras gerações (crianças e adolescentes), de modo a diminuir o etarismo.",
@@ -152,7 +152,7 @@
       }
     },
     {
-      "gestão da ILPI": {
+      "Gestão da ILPI": {
         "perguntas": [
           {
             "enunciado": "A ILPI realiza o monitoramento do desempenho e do padrão de funcionamento da instituição levando em conta os seis indicadores, recomendados pela RDC nº 502, DE 27 de maio de 2021: taxa de mortalidade; taxa de incidência de doença diarreica aguda; taxa de incidência de escabiose; taxa de incidência de desidratação; taxa de prevalência de úlcera de decúbito; taxa de prevalência de desnutrição e notificação à autoridade sanitária.",
@@ -193,7 +193,7 @@
       }
     },
     {
-      "equipe de trabalho": {
+      "Equipe de Trabalho": {
         "perguntas": [
           {
             "enunciado": "A ILPI possui, por turno/dia, no mínimo, um cuidador, para cada 20 pessoas idosas com grau de dependência I (idosos independentes, mesmo que requeiram uso de equipamentos de autoajuda); um cuidador para cada 10 pessoas idosas com grau de dependência II (idosos com dependência em até três atividades de autocuidado para a vida diária tais como: alimentação, mobilidade, higiene; sem comprometimento cognitivo ou com alteração cognitiva controlada); e um cuidador para cada 6 pessoas idosas com grau de dependência III (idosos com dependência que requeiram assistência em todas as atividades de autocuidado para a vida diária e ou com comprometimento cognitivo).",
@@ -242,7 +242,7 @@
       }
     },
     {
-      "envolvimento familiar": {
+      "Envolvimento Familiar": {
         "perguntas": [
           {
             "enunciado": "A ILPI possui estratégias para incentivar a participação e o envolvimento da família, quando presente, no cuidado do idoso (visitas, envolvimento de familiares em cuidados pessoais dos idosos, participação na elaboração do plano de cuidados, indicações de referências médicas etc.), inclusive usando de meios digitais como contato por telefone e vídeo chamadas. A participação da comunidade ou de voluntários, também é desejada, por meio de desenvolvimento de atividades de integração com idosos na ILPI ou em outros espaços (centros sociais, escolas, igrejas etc.).",

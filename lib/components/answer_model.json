@@ -1,7 +1,7 @@
 {
     "dimensões": [
         {
-            "ambiente": [
+            "Ambiente": [
                 null,
                 null,
                 null,
@@ -10,16 +10,7 @@
             ]
         },
         {
-            "equipe de trabalho": [
-                null,
-                null,
-                null,
-                null,
-                null
-            ]
-        },
-        {
-            "cuidado": [
+            "Cuidado": [
                 null,
                 null,
                 null,
@@ -31,22 +22,31 @@
             ]
         },
         {
-            "lar": [
+            "Lar": [
                 null,
                 null,
                 null
             ]
         },
         {
-            "envolvimento familiar": [
+            "Gestão da ILPI": [
+                null,
+                null,
                 null,
                 null
             ]
         },
         {
-            "gestão da ILPI": [
+            "Equipe de Trabalho": [
                 null,
                 null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "Envolvimento Familiar": [
                 null,
                 null
             ]
