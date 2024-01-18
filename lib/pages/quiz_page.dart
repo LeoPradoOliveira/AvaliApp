@@ -237,8 +237,8 @@ class _QuizPageState extends State<QuizPage> {
       },
       child: Container(
         width: double.infinity,
-        constraints: BoxConstraints(
-          minHeight: 80.0, // Defina a altura mínima desejada
+        constraints: const BoxConstraints(
+          minHeight: 80.0,
         ),
         alignment: Alignment.center,
         margin: const EdgeInsets.symmetric(vertical: 8),
