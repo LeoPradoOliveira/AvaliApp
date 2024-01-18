@@ -34,7 +34,7 @@
             "enunciado": "A ILPI possui:\n1- local reservado, fechado à chave, para a guarda de produtos e medicamentos, com espaço para acondicionamento de forma individualizada, mantidos em sua embalagem original, com planilha com nome e posologia para entrega;\n2- acondicionamento de medicamentos termo lábeis e dietas enterais em geladeira exclusiva para este fim, dotada de termômetro e planilha de controle de temperatura.",
             "respostas": [
               "Inexistente, a ILPI não possui os itens definidos pelo padrão",
-              "Intermediário, apresenta somente um dos itens ou características incompletas de um ou dos dois, como sala separada, mas não trancada, possui geladeira, mas não exclusiva para o fim",
+              "Intermediário, apresenta somente um dos itens ou características incompletas de um ou dos dois",
               "Avançado, possui todos os itens definidos pelo padrão de qualidade"
             ]
           },
@@ -43,7 +43,7 @@
             "respostas": [
               "Inexistente, há presença de odores nos ambientes comuns e quartos",
               "Intermediário, há presença de odores nos quartos",
-              "Avançado, não há presença de odores"
+              "Avançado, não há presença de odores na ILPI"
             ]
           }
         ]
@@ -55,10 +55,10 @@
           {
             "enunciado": "A ILPI oferece as refeições diárias necessárias: café, lanche, almoço, lanche da tarde, jantar e lanche antes de dormir. O cardápio das refeições é definido por um profissional nutricionista e é diversificado, levando em conta, além das restrições de cada idoso, a estação do ano, os aspectos culturais locais e os desejos dos idosos, considerando sua condição de saúde.",
             "respostas": [
-              "Inexistente, a ILPI não oferece no mínimo seis refeições diárias e o cardápio não é definido por um profissional nutricionista",
-              "Incipiente, a ILPI oferece, no mínimo, seis refeições diárias, mas o cardápio não é definido por um profissional nutricionista",
-              "Intermediário, a ILPI oferece, no mínimo, seis refeições diárias, o cardápio é definido por um profissional nutricionista, mas não considera os desejos e gostos dos idosos",
-              "Avançado, a ILPI oferece no mínimo seis refeições diárias, o cardápio é definido por um profissional nutricionista e é diversificado, considerando os desejos do idoso"
+              "A ILPI não oferece no mínimo seis refeições diárias e o cardápio não é definido por um profissional nutricionista",
+              "A ILPI oferece, no mínimo, seis refeições diárias, mas o cardápio não é definido por um profissional nutricionista",
+              "A ILPI oferece, no mínimo, seis refeições diárias, o cardápio é definido por um profissional nutricionista, mas não considera os desejos e gostos dos idosos",
+              "A ILPI oferece no mínimo seis refeições diárias, o cardápio é definido por um profissional nutricionista e é variado, considerando os desejos do idoso"
             ]
           },
           {
@@ -70,7 +70,7 @@
             ]
           },
           {
-            "enunciado": "A ILPI possui Plano de Atencao Integral á Saúde (plano individualizado para cada idoso, compatível os princípios de universalização, integralidade e equidade, com história clinica, medicamentos utilizados e tratamentos realizados).1- atualizado a cada dois anos; 2- que indica os recursos de saúde disponíveis para cada residente, em todos os níveis de atenção, sejam eles públicos ou privados, bem como referências, caso se faça necessário; 3- que prevê a atenção integral à saúde do idoso, abordando os aspectos de promoção, proteção e prevenção; 4- que contém informações acerca das patologias incidentes e prevalentes nos residentes.",
+            "enunciado": "A ILPI possui Plano de Atencao Integral á Saúde:\n1- atualizado a cada dois anos;\n2- que indica os recursos de saúde disponíveis para cada residente, em todos os níveis de atenção, sejam eles públicos ou privados, bem como referências, caso se faça necessário;\n3- que prevê a atenção integral à saúde do idoso, abordando os aspectos de promoção, proteção e prevenção;\n4- que contém informações acerca das patologias incidentes e prevalentes nos residentes.",
             "respostas": [
               "Inexistente, a ILPI não possui plano de atenção à saúde",
               "Incipiente, o plano de atenção à saúde da ILPI está desatualizado, mas contempla, pelo menos, 1 dos outros 4 itens definidos no padrão de qualidade",
@@ -82,7 +82,7 @@
             "enunciado": "A ILPI mantém registro, relatório individual, de cada idoso atualizado diariamente com as seguintes informações: nome do responsável, referências externas com seus endereços, relação de seus pertences, suas vontades e desejos, histórico de visitas, o valor de contribuições, situação de saúde, evolução de tratamento, atividades de promoção de saúde, atendimentos multiprofissionais, intercorrências médicas, internações, medicamentos e demais dados que possibilitem a individualização do atendimento. Todos os fatos relevantes ocorridos com o idoso são registrados diariamente nos prontuários e nos relatórios dos cuidados pela equipe multiprofissional.",
             "respostas": [
               "Inexistente, a ILPI não possui prontuário ou relatórios diários de cuidado para cada idoso",
-              "Intermediário, a ILPI possui prontuário ou relatórios diários de cuidado para cada idoso, mas ele não contém todas as informações descritas conforme padrão de qualidade ou o registro não é diário",
+              "Intermediário, a ILPI possui prontuário ou relatórios diários de cuidado para cada idoso, mas ele não está conforme padrão de qualidade ou o registro não é diário",
               "Avançado, a ILPI possui prontuário ou relatórios diários de cuidado para cada idoso, atualizado diariamente"
             ]
           },
@@ -97,18 +97,18 @@
             "enunciado": "A ILPI oferta o banho de sol diário e atividades físicas (caminhada, ginástica, dança etc.) de forma regular e contínua, desenvolvidas por um profissional de nível superior (mínimo de um para cada 40 idosos, com carga horária de 12 horas por semana), de acordo com as necessidades e do grau de dependência dos idosos.",
             "respostas": [
               "Inexistente, não acontecem atividades físicas",
-              "Incipiente, as atividades físicas são esporádicas - frequência menor que 3 vezes por semana - e só acontecem por iniciativa de trabalhos voluntários",
-              "Intermediário, a instituição promove atividades físicas esporádicas - menor que 3 vezes por semana - desenvolvidas por um profissional com formação de nível superior",
-              "Avançado, são desenvolvidas atividades físicas - pelo menos 3 vezes por semana - por um profissional com formação de nível superior"
+              "Incipiente, as atividades físicas ocorrem menos de 3 vezes por semana e só acontecem por iniciativa de trabalhos voluntários",
+              "Intermediário, a instituição promove atividades físicas menos de 3 vezes por semana, desenvolvidas por profissional com formação de nível superior",
+              "Avançado, são desenvolvidas atividades físicas pelo menos 3 vezes por semana por um profissional com formação de nível superior"
             ]
           },
           {
             "enunciado": "A ILPI promove atividades de lazer, recreativas e culturais, de acordo com costumes locais, aceitando sugestões dos residentes (passeios em parques, teatro, cinema, shows musicais etc.) de forma regular e contínua e promove atividades de lazer, acompanhadas por profissional de nível superior e se possível com voluntários.",
             "respostas": [
               "Inexistente, a ILPI não oferta atividades recreativas e culturais",
-              "Incipiente, as atividades recreativas e culturais são esporádicas - frequência maior que uma vez por semana - e só acontecem por iniciativa de trabalhos voluntários",
-              "Intermediário, as atividades recreativas e culturais são esporádicas - frequência maior que uma vez por semana - desenvolvidas pela equipe de trabalho da ILPI",
-              "Avançado, as atividades recreativas e culturais são desenvolvidas - pelo menos uma vez por semana - por profissionais da equipe de trabalho da ILPI"
+              "Incipiente, as atividades recreativas e culturais acontecem mais de uma vez por semana e só acontecem por iniciativa de trabalhos voluntários",
+              "Intermediário, as atividades recreativas e culturais acontecem mais de uma vez por semana e são desenvolvidas pela equipe de trabalho da ILPI",
+              "Avançado, as atividades recreativas e culturais são desenvolvidas pelo menos uma vez por semana por profissionais da equipe de trabalho da ILPI"
             ]
           },
           {
@@ -130,14 +130,14 @@
             "enunciado": "A ILPI favorece o desenvolvimento de atividades conjuntas, promovendo a interação das pessoas idosas, por meio de parcerias, de forma voluntária ou não, com pessoas de outras gerações (crianças e adolescentes), de modo a diminuir o etarismo.",
             "respostas": [
               "Inexistente, a instituição não promove ações com pessoas de outras gerações, nem motiva a participação do idoso nesse tipo de atividade",
-              "Avançado, a instituição promove integração dos idosos com outras gerações, por exemplo, permitindo visita de escolares, crianças, estudantes universitários etc."
+              "Avançado, a instituição promove integração dos idosos com outras gerações, por exemplo, permitindo visita de escolares, crianças etc"
             ]
           },
           {
             "enunciado": "A ILPI autoriza que os idosos possuam animais de estimação, desde que permitido pela vigilância sanitária, plantas, objetos de decoração, móveis ou outros objetos pessoais que façam com que os idosos se sintam em casa.",
             "respostas": [
               "Inexistente, não são permitidos objetos pessoais",
-              "Avançado, permite aos residentes possuírem objetos de decoração ou animais de estimação (quando permitido) ou plantas ou móveis ou outros objetos pessoais"
+              "Avançado, permite aos residentes possuírem objetos de decoração ou animais de estimação (quando permitido) ou plantas ou outros objetos pessoais"
             ]
           },
           {
@@ -175,18 +175,18 @@
             "enunciado": "O gerente ou outro profissional da Unidade Básica de Saúde (UBS) cujo território de atuação a ILPI esteja inserida, participa da elaboração do Plano de Atenção à Saúde da instituição.",
             "respostas": [
               "Inexistente, a ILPI não realiza o plano de atenção à saúde",
-              "Incipiente, o plano de atenção à saúde da ILPI é elaborado pelos gestores da ILPI",
-              "Intermediário, o plano de atenção à saúde da ILPI é elaborado por uma equipe de profissionais da ILPI",
-              "Avançado, o plano de atenção à saúde da ILPI é elaborado por uma equipe de profissionais da ILPI, com a participação de um profissional da UBS da área de abrangência da ILPI"
+              "Incipiente, o plano de atenção à saúde é elaborado pelos gestores da ILPI",
+              "Intermediário, o plano de atenção à saúde é elaborado por uma equipe de profissionais da ILPI",
+              "Avançado, o plano de atenção à saúde é elaborado por uma equipe da ILPI, com a participação de profissional da UBS da área de abrangência da ILPI"
             ]
           },
           {
-            "enunciado": "A ILPI realiza estratégias (reuniões de equipe, escala de profissionais adequada ao perfil dos idosos, participação em fóruns de ILPI, capacitação de trabalhadores) ou possui algum incentivo (plano de cargos e carreiras) para reduzir a rotatividade ou aumentar a fixação dos profissionais da equipe de trabalho.",
+            "enunciado": "A Instituição de Longa Permanência para Idosos (ILPI) adota estratégias e/ou oferece incentivos para diminuir a rotatividade ou aumentar a fixação de sua equipe de trabalho.",
             "respostas": [
-              "Inexistente, a ILPI não realiza estratégias ou possui incentivo para reduzir a rotatividade ou aumentar a fixação dos profissionais da equipe de trabalho e apresenta rotatividade anual superior a 50%",
+              "Inexistente, não existem estratégias nem há incentivos para reduzir a rotatividade ou aumentar a fixação dos profissionais da equipe de trabalho. Além disso, a rotatividade anual é superior a 50%",
               "Incipiente, a ILPI possui algum incentivo mas apresenta rotatividade superior a 50% em um ano",
               "Intermediário, apresenta algum incentivo e tem rotatividade menor que 50% em um ano",
-              "Avançado, a ILPI realiza estratégias e possui incentivos para reduzir a rotatividade ou aumentar a fixação dos profissionais da equipe de trabalho e apresenta rotatividade menor que 50% em um ano"
+              "Avançado, existem estratégias e há incentivos para reduzir a rotatividade ou aumentar a fixação dos profissionais da equipe de trabalho e apresenta rotatividade menor que 50% em um ano"
             ]
           }
         ]
@@ -245,12 +245,12 @@
       "Envolvimento Familiar": {
         "perguntas": [
           {
-            "enunciado": "A ILPI possui estratégias para incentivar a participação e o envolvimento da família, quando presente, no cuidado do idoso (visitas, envolvimento de familiares em cuidados pessoais dos idosos, participação na elaboração do plano de cuidados, indicações de referências médicas etc.), inclusive usando de meios digitais como contato por telefone e vídeo chamadas. A participação da comunidade ou de voluntários, também é desejada, por meio de desenvolvimento de atividades de integração com idosos na ILPI ou em outros espaços (centros sociais, escolas, igrejas etc.).",
+            "enunciado": "A ILPI possui estratégias para incentivar a participação e o envolvimento da família, quando presente, no cuidado do idoso (visitas, envolvimento de familiares nos cuidados pessoais dos idosos, participação na elaboração do plano de cuidados, indicações de referências médicas etc.), inclusive utilizando meios digitais como contato por telefone e videochamadas. A participação da comunidade ou de voluntários também é desejada, por meio do desenvolvimento de atividades de integração com os idosos na ILPI ou em outros espaços (centros sociais, escolas, igrejas etc.).",
             "respostas": [
               "Inexistente, a ILPI não desenvolve estratégias ou incentiva a presença e o envolvimento da família no cuidado ao idoso ou ações na/da comunidade",
               "Incipiente, a ILPI não desenvolve estratégias ou incentiva a presença e o envolvimento da família no cuidado ao idoso ou ações na/da comunidade, mas existe livre horário para visita da família",
-              "Intermediário, existe livre horário para visitas pelos familiares e a comunidade pode promover ou participar de atividades dentro da ILPI e os idosos são estimulados a participarem (festas comemorativas, Natal, Páscoa, aniversários, festas juninas etc.)",
-              "Avançado, existe incentivo e programações para visitas dos familiares e promoção de integração dos idosos com a comunidade, a partir de ações promovidas pela ILPI (bazar, quermesse etc.) ou pela comunidade (por exemplo, celebrações religiosas, festas comunitárias, grupos de idosos etc..)"
+              "Intermediário, existe livre horário para visitas pelos familiares, e a comunidade pode promover ou participar de atividades dentro da ILPI, sendo os idosos estimulados a participarem",
+              "Avançado, existe incentivo e programações para visitas dos familiares e promoção de integração dos idosos com a comunidade, por meio de ações promovidas pela ILPI ou pela comunidade"
             ]
           },
           {

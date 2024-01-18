@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -15,6 +17,10 @@ class _QuizPageState extends State<QuizPage> {
   late Map<String, dynamic> questions;
   late PageController controller;
   int questionNumber = 0;
+  final currentUser = FirebaseAuth.instance.currentUser!;
+  final usersCollection = FirebaseFirestore.instance.collection("users");
+  late Map<String, dynamic> userData;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -24,15 +30,42 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> initializeQuestions() async {
-    String jsonString =
-        await rootBundle.loadString('lib/components/questions.json');
     setState(() {
-      questions = json.decode(jsonString);
+      isLoading = true;
     });
+
+    try {
+      String jsonString =
+          await rootBundle.loadString('lib/components/questions.json');
+
+      DocumentReference userDocRef =
+          FirebaseFirestore.instance.collection("users").doc(currentUser.uid);
+
+      DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
+          await userDocRef.get() as DocumentSnapshot<Map<String, dynamic>>;
+      setState(() {
+        questions = json.decode(jsonString);
+        userData = userDataSnapshot.data()!;
+        isLoading = false;
+      });
+    } catch (error) {
+      print("Erro ao carregar os dados: $error");
+
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
         body: Container(
       color: Colors.grey[300],
@@ -183,7 +216,10 @@ class _QuizPageState extends State<QuizPage> {
               child: Column(
                 children: [
                   ...question['respostas']
-                      .map((resposta) => buildOption(context, resposta))
+                      .asMap()
+                      .entries
+                      .map((entry) =>
+                          buildOption(context, entry.value, entry.key))
                       .toList(),
                   const SizedBox(
                     height: 20,
@@ -197,13 +233,35 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  Widget buildOption(BuildContext context, String resposta) {
+  Widget buildOption(BuildContext context, String resposta, int index) {
     return GestureDetector(
+      onTap: () async {
+        try {
+          DocumentReference userDocRef = FirebaseFirestore.instance
+              .collection("users")
+              .doc(currentUser.uid);
+
+          userData['Respostas']['dimensões'][widget.index][widget.dimension]
+              [questionNumber] = index;
+          print(userData['Respostas']['dimensões'][widget.index]
+              [widget.dimension][questionNumber]);
+
+          await userDocRef.update(userData);
+
+          setState(() {});
+        } catch (error) {
+          print("Erro ao atualizar os dados: $error");
+        }
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 74, 90, 125),
+          color: index ==
+                  userData['Respostas']['dimensões'][widget.index]
+                      [widget.dimension][questionNumber]
+              ? Colors.green
+              : const Color.fromARGB(255, 74, 90, 125),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Colors.black),
         ),
@@ -212,12 +270,13 @@ class _QuizPageState extends State<QuizPage> {
           children: [
             Text(
               resposta,
-              maxLines: 4,
+              maxLines: 5,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
