@@ -47,7 +47,7 @@ class QuestionsPage extends StatelessWidget {
                                   height: 120,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.green,
+                                    color: Colors.black,
                                   ),
                                   child: CircleAvatar(
                                     backgroundImage:

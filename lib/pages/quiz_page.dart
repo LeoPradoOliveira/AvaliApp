@@ -36,13 +36,13 @@ class _QuizPageState extends State<QuizPage> {
     });
 
     try {
-      String jsonString =
+      final String jsonString =
           await rootBundle.loadString('lib/components/questions.json');
 
-      DocumentReference userDocRef =
+      final DocumentReference userDocRef =
           FirebaseFirestore.instance.collection("users").doc(currentUser.uid);
 
-      DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
+      final DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
           await userDocRef.get() as DocumentSnapshot<Map<String, dynamic>>;
 
       setState(() {

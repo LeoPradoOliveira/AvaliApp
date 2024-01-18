@@ -44,8 +44,13 @@ class _LoginPageState extends State<LoginPage> {
 
 
     } on FirebaseAuthException catch (e) {
-      
-      if (e.code == 'invalid-email') {
+      if(emailController.text == ""){
+        errorMessage("Insira um e-mail");
+      }
+      else if (passwordController.text == "") {
+        errorMessage("Insira uma senha");
+      }
+      else if (e.code == 'invalid-email') {
         errorMessage("E-mail inválido");
       } else if (e.code == 'invalid-credential') {
         errorMessage("E-mail ou senha incorretos");
