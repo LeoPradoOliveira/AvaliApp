@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 class QuizPage extends StatefulWidget {
   final String dimension;
   final int index;
+
   const QuizPage(this.dimension, this.index, {Key? key}) : super(key: key);
 
   @override
@@ -43,6 +44,7 @@ class _QuizPageState extends State<QuizPage> {
 
       DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
           await userDocRef.get() as DocumentSnapshot<Map<String, dynamic>>;
+
       setState(() {
         questions = json.decode(jsonString);
         userData = userDataSnapshot.data()!;
@@ -50,7 +52,6 @@ class _QuizPageState extends State<QuizPage> {
       });
     } catch (error) {
       print("Erro ao carregar os dados: $error");
-
       setState(() {
         isLoading = false;
       });
@@ -66,123 +67,108 @@ class _QuizPageState extends State<QuizPage> {
         ),
       );
     }
+
     return Scaffold(
-        body: Container(
-      color: Colors.grey[300],
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(22),
-                  bottomRight: Radius.circular(22),
+      body: Container(
+        color: Colors.grey[300],
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildAppBar(),
+              Expanded(
+                child: PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller,
+                  itemCount: questions['dimensões'][widget.index]
+                          [widget.dimension]['perguntas']
+                      .length,
+                  itemBuilder: (context, index) {
+                    final question = questions['dimensões'][widget.index]
+                        [widget.dimension]['perguntas'][index];
+                    return _buildQuestion(question);
+                  },
                 ),
-                color: Color.fromARGB(255, 23, 35, 60),
               ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        color: Colors.white,
-                      ),
-                      Text(
-                        widget.dimension,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.white,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_rounded),
-                        onPressed: () {
-                          if (questionNumber > 0) {
-                            setState(() {
-                              questionNumber--;
-                            });
-                            controller.jumpToPage(questionNumber);
-                          }
-                        },
-                        color: Colors.white,
-                        iconSize: 32,
-                      ),
-                      Text(
-                        '${questionNumber + 1}/${questions['dimensões'][widget.index][widget.dimension]['perguntas'].length}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.arrow_forward_ios_rounded),
-                        onPressed: () {
-                          if (questionNumber <
-                              questions['dimensões'][widget.index]
-                                          [widget.dimension]['perguntas']
-                                      .length -
-                                  1) {
-                            setState(() {
-                              questionNumber++;
-                            });
-                            controller.jumpToPage(questionNumber);
-                          }
-                        },
-                        color: Colors.white,
-                        iconSize: 32,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: PageView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: controller,
-                itemCount: questions['dimensões'][widget.index]
-                        [widget.dimension]['perguntas']
-                    .length,
-                itemBuilder: (context, index) {
-                  final question = questions['dimensões'][widget.index]
-                      [widget.dimension]['perguntas'][index];
-                  return buildQuestion(question);
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
-  Padding buildQuestion(Map<String, dynamic> question) {
+  Widget _buildAppBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(22),
+          bottomRight: Radius.circular(22),
+        ),
+        color: Color.fromARGB(255, 23, 35, 60),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.white,
+              ),
+              Text(
+                widget.dimension,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 50),
+            ],
+          ),
+          const Divider(
+            thickness: 1,
+            color: Colors.white,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildArrowButton(Icons.arrow_back_ios_rounded, () {
+                _navigateToPreviousQuestion();
+              }),
+              Text(
+                '${questionNumber + 1}/${questions['dimensões'][widget.index][widget.dimension]['perguntas'].length}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              _buildArrowButton(Icons.arrow_forward_ios_rounded, () {
+                _navigateToNextQuestion();
+              }),
+            ],
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildArrowButton(IconData icon, VoidCallback onPressed) {
+    return IconButton(
+      icon: Icon(icon),
+      onPressed: onPressed,
+      color: Colors.white,
+      iconSize: 32,
+    );
+  }
+
+  Widget _buildQuestion(Map<String, dynamic> question) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
@@ -190,28 +176,9 @@ class _QuizPageState extends State<QuizPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 23, 35, 60),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                question['enunciado'],
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 10),
+            _buildQuestionContainer(question['enunciado']),
+            const SizedBox(height: 8),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -219,11 +186,9 @@ class _QuizPageState extends State<QuizPage> {
                       .asMap()
                       .entries
                       .map((entry) =>
-                          buildOption(context, entry.value, entry.key))
+                          _buildOption(context, entry.value, entry.key))
                       .toList(),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
@@ -233,7 +198,26 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  Widget buildOption(BuildContext context, String resposta, int index) {
+  Widget _buildQuestionContainer(String text) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 23, 35, 60),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOption(BuildContext context, String resposta, int index) {
     return GestureDetector(
       onTap: () async {
         try {
@@ -243,8 +227,6 @@ class _QuizPageState extends State<QuizPage> {
 
           userData['Respostas']['dimensões'][widget.index][widget.dimension]
               [questionNumber] = index;
-          print(userData['Respostas']['dimensões'][widget.index]
-              [widget.dimension][questionNumber]);
 
           await userDocRef.update(userData);
 
@@ -254,6 +236,11 @@ class _QuizPageState extends State<QuizPage> {
         }
       },
       child: Container(
+        width: double.infinity,
+        constraints: BoxConstraints(
+          minHeight: 80.0, // Defina a altura mínima desejada
+        ),
+        alignment: Alignment.center,
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -273,14 +260,36 @@ class _QuizPageState extends State<QuizPage> {
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
               textAlign: TextAlign.center,
+              
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _navigateToPreviousQuestion() {
+    if (questionNumber > 0) {
+      setState(() {
+        questionNumber--;
+      });
+      controller.jumpToPage(questionNumber);
+    }
+  }
+
+  void _navigateToNextQuestion() {
+    if (questionNumber <
+        questions['dimensões'][widget.index][widget.dimension]['perguntas']
+                .length -
+            1) {
+      setState(() {
+        questionNumber++;
+      });
+      controller.jumpToPage(questionNumber);
+    }
   }
 }
