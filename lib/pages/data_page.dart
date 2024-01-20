@@ -39,21 +39,21 @@ class _DataPageState extends State<DataPage> {
                   final userData =
                       snapshot.data!.data() as Map<String, dynamic>;
                   List notAnswered = [];
-                  List<double> radarEntries = [];
+                  List<double> radarEntries = [0, 0, 0, 0, 0, 0];
                   final answers = userData['Respostas']['dimensões'];
                   for (var i = 0; i < answers.length; i++) {
                     for (var key in answers[i].keys) {
                       var array = answers[i][key] as List?;
                       if (array != null && array.contains(null)) {
                         notAnswered.add(key);
-                        radarEntries.add(0);
+                        radarEntries[i] = 0;
                         break;
                       } else {
                         double sum = 0;
-                        for (var j = 0; j < array!.length - 1; j++) {
+                        for (var j = 0; j < array!.length; j++) {
                           sum += array[j] / (lengthsOfAnswers[i][j] - 1);
                         }
-                        radarEntries.add((sum / (array.length - 1)) * 10);
+                        radarEntries[i] = (sum / (array.length)) * 10;
                       }
                     }
                   }
@@ -88,9 +88,15 @@ class _DataPageState extends State<DataPage> {
                   ];
 
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       notAnswered.isEmpty
-                          ? const SizedBox()
+                          ? const SizedBox(
+                              child: Text(
+                                "Com todas as perguntas respondidas, a nota final da instituição foi a seguinte:",
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                           : SizedBox(
                               width: double.infinity,
                               child: Column(
@@ -153,16 +159,16 @@ class _DataPageState extends State<DataPage> {
                                     },
                                     itemCount: notAnswered.length,
                                   ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Divider(
+                                    thickness: 1,
+                                    color: Colors.white,
+                                  ),
                                 ],
                               ),
                             ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        color: Colors.white,
-                      ),
                       const SizedBox(
                         height: 52.5,
                       ),
