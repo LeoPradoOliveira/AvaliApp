@@ -69,29 +69,27 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     return Scaffold(
-      body: Container(
-        color: Colors.grey[300],
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildAppBar(),
-              Expanded(
-                child: PageView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: controller,
-                  itemCount: questions['dimensões'][widget.index]
-                          [widget.dimension]['perguntas']
-                      .length,
-                  itemBuilder: (context, index) {
-                    final question = questions['dimensões'][widget.index]
-                        [widget.dimension]['perguntas'][index];
-                    return _buildQuestion(question);
-                  },
-                ),
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildAppBar(),
+            Expanded(
+              child: PageView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: controller,
+                itemCount: questions['dimensões'][widget.index]
+                        [widget.dimension]['perguntas']
+                    .length,
+                itemBuilder: (context, index) {
+                  final question = questions['dimensões'][widget.index]
+                      [widget.dimension]['perguntas'][index];
+                  return _buildQuestion(question);
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -264,7 +262,6 @@ class _QuizPageState extends State<QuizPage> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
               textAlign: TextAlign.center,
-              
             ),
           ],
         ),
