@@ -248,7 +248,7 @@ class _QuizPageState extends State<QuizPage> {
               ? Colors.green
               : const Color.fromARGB(255, 74, 90, 125),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.black),
+          border: Border.all(color: Colors.black,width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
