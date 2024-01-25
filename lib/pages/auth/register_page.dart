@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+import 'dart:convert';
 import 'package:avaliapp/components/my_button.dart';
 import 'package:avaliapp/components/my_text_field.dart';
 import 'package:avaliapp/components/square_tile.dart';
@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -22,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  bool isLoading = false;
 
   void errorMessage(String message) {
     showDialog(
@@ -46,26 +46,26 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
-        
+
         User? user = FirebaseAuth.instance.currentUser;
         if (user != null) {
+
           final String file =
               await rootBundle.loadString('lib/components/answer_model.json');
           final answerModel = await json.decode(file);
           FirebaseFirestore.instance.collection('users').doc(user.uid).set({
             'E-mail': user.email,
             'Respostas': answerModel,
-            'Foto': "https://firebasestorage.googleapis.com/v0/b/avaliapp-e041d.appspot.com/o/Fotos%2FdefaultProfilePicture.jpg?alt=media&token=29beb6cb-c6ca-4378-abf8-b94736d425c7",
+            'Foto':
+                "https://firebasestorage.googleapis.com/v0/b/avaliapp-e041d.appspot.com/o/Fotos%2FdefaultProfilePicture.jpg?alt=media&token=29beb6cb-c6ca-4378-abf8-b94736d425c7",
             'Instituição': "Insira o nome da sua instituição",
             'Nome': "Insira o seu nome",
           });
         }
       } else {
-        
         errorMessage("As senhas não coincidem");
       }
     } on FirebaseAuthException catch (e) {
-      
       if (e.code == 'invalid-email') {
         errorMessage("E-mail inválido");
       } else if (e.code == 'email-already-in-use') {
@@ -118,10 +118,20 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 20),
                 //
                 MyButton(
-                  onTap: signUserUp,
+                  onTap: () {
+                    if (!isLoading) {
+                      signUserUp();
+                    }
+                  },
                   text: 'Cadastrar',
                 ),
-                //
+                if (isLoading)
+                  const Column(
+                    children: [
+                      SizedBox(height: 20),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
                 const SizedBox(height: 30),
                 //
                 Row(

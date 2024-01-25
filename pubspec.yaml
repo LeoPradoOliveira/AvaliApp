@@ -68,16 +68,8 @@ flutter:
 
   
   assets:
-    - lib/images/googleLogo.png
-    - lib/images/logo.png
-    - lib/images/Frame0.png
-    - lib/images/Frame1.png
-    - lib/images/Frame2.png
-    - lib/images/Frame3.png
-    - lib/images/Frame4.png
-    - lib/images/Frame5.png
-    - lib/components/answer_model.json
-    - lib/components/questions.json
+    - lib/images/
+    - lib/components/
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
