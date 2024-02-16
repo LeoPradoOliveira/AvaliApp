@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 
 class QuizPage extends StatefulWidget {
   final String dimension;
@@ -16,11 +14,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   late Map<String, dynamic> questions;
+  late Map<String, dynamic> userData;
   late PageController controller;
   int questionNumber = 0;
   final currentUser = FirebaseAuth.instance.currentUser!;
   final usersCollection = FirebaseFirestore.instance.collection("users");
-  late Map<String, dynamic> userData;
+  final questionsCollection =
+      FirebaseFirestore.instance.collection("perguntas");
   bool isLoading = true;
 
   @override
@@ -36,22 +36,23 @@ class _QuizPageState extends State<QuizPage> {
     });
 
     try {
-      final String jsonString =
-          await rootBundle.loadString('lib/components/questions.json');
-
       final DocumentReference userDocRef =
           FirebaseFirestore.instance.collection("users").doc(currentUser.uid);
+      final DocumentReference questionDocRef = FirebaseFirestore.instance
+          .collection("perguntas")
+          .doc(widget.dimension);
 
       final DocumentSnapshot<Map<String, dynamic>> userDataSnapshot =
           await userDocRef.get() as DocumentSnapshot<Map<String, dynamic>>;
+      final DocumentSnapshot<Map<String, dynamic>> questionDataSnapshot =
+          await questionDocRef.get() as DocumentSnapshot<Map<String, dynamic>>;
 
       setState(() {
-        questions = json.decode(jsonString);
+        questions = questionDataSnapshot.data()!;
         userData = userDataSnapshot.data()!;
         isLoading = false;
       });
     } catch (error) {
-      print("Erro ao carregar os dados: $error");
       setState(() {
         isLoading = false;
       });
@@ -79,12 +80,9 @@ class _QuizPageState extends State<QuizPage> {
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: controller,
-                itemCount: questions['dimensões'][widget.index]
-                        [widget.dimension]['perguntas']
-                    .length,
+                itemCount: questions["perguntas"].length,
                 itemBuilder: (context, index) {
-                  final question = questions['dimensões'][widget.index]
-                      [widget.dimension]['perguntas'][index];
+                  final question = questions['perguntas'][index];
                   return _buildQuestion(question);
                 },
               ),
@@ -139,7 +137,7 @@ class _QuizPageState extends State<QuizPage> {
                 _navigateToPreviousQuestion();
               }),
               Text(
-                '${questionNumber + 1}/${questions['dimensões'][widget.index][widget.dimension]['perguntas'].length}',
+                '${questionNumber + 1}/${questions['perguntas'].length}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -180,12 +178,16 @@ class _QuizPageState extends State<QuizPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  ...question['respostas']
+                  ...(question['respostas'] as List<dynamic>)
                       .asMap()
                       .entries
-                      .map((entry) =>
-                          _buildOption(context, entry.value, entry.key))
-                      .toList(),
+                      .map((entry) {
+                    final index = entry.key;
+                    final resposta = entry.value;
+                    final String texto = resposta['texto'];
+                    final num valor = resposta['valor'];
+                    return _buildOption(context, texto, valor, index);
+                  }).toList(),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -197,6 +199,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget _buildQuestionContainer(String text) {
+    text = text.replaceAll(r'\n', '\n');
     return Container(
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 23, 35, 60),
@@ -215,23 +218,19 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  Widget _buildOption(BuildContext context, String resposta, int index) {
+  Widget _buildOption(
+      BuildContext context, String resposta, num valor, int index) {
     return GestureDetector(
       onTap: () async {
-        try {
-          DocumentReference userDocRef = FirebaseFirestore.instance
-              .collection("users")
-              .doc(currentUser.uid);
+        DocumentReference userDocRef =
+            FirebaseFirestore.instance.collection("users").doc(currentUser.uid);
 
-          userData['Respostas']['dimensões'][widget.index][widget.dimension]
-              [questionNumber] = index;
+        userData['Respostas']['dimensões'][widget.index][widget.dimension]
+            [questionNumber] = valor;
 
-          await userDocRef.update(userData);
+        await userDocRef.update(userData);
 
-          setState(() {});
-        } catch (error) {
-          print("Erro ao atualizar os dados: $error");
-        }
+        setState(() {});
       },
       child: Container(
         width: double.infinity,
@@ -242,13 +241,13 @@ class _QuizPageState extends State<QuizPage> {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: index ==
+          color: valor ==
                   userData['Respostas']['dimensões'][widget.index]
                       [widget.dimension][questionNumber]
               ? Colors.green
               : const Color.fromARGB(255, 74, 90, 125),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.black,width: 1),
+          border: Border.all(color: Colors.black, width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -279,10 +278,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void _navigateToNextQuestion() {
-    if (questionNumber <
-        questions['dimensões'][widget.index][widget.dimension]['perguntas']
-                .length -
-            1) {
+    if (questionNumber < questions['perguntas'].length - 1) {
       setState(() {
         questionNumber++;
       });

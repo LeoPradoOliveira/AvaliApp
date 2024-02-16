@@ -1,3 +1,4 @@
+import 'package:avaliapp/pages/reviews_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,14 +17,6 @@ class _DataPageState extends State<DataPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<List<int>> lengthsOfAnswers = [
-      [4, 4, 4, 3, 3],
-      [4, 3, 4, 3, 2, 4, 4, 4],
-      [2, 2, 3],
-      [4, 3, 4, 4],
-      [4, 3, 4, 4, 3],
-      [4, 3]
-    ];
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -51,9 +44,9 @@ class _DataPageState extends State<DataPage> {
                       } else {
                         double sum = 0;
                         for (var j = 0; j < array!.length; j++) {
-                          sum += array[j] / (lengthsOfAnswers[i][j] - 1);
+                          sum += array[j];
                         }
-                        radarEntries[i] = (sum / (array.length)) * 10;
+                        radarEntries[i] = (sum / (array.length));
                       }
                     }
                   }
@@ -175,8 +168,6 @@ class _DataPageState extends State<DataPage> {
                       AspectRatio(
                         aspectRatio: 1.5,
                         child: RadarChart(
-                          swapAnimationDuration:
-                              const Duration(milliseconds: 900),
                           swapAnimationCurve: Curves.linear,
                           RadarChartData(
                             titlePositionPercentageOffset: 0.1,
@@ -231,7 +222,20 @@ class _DataPageState extends State<DataPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 80,
+                        height: 70,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ReviewsPage()),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.poll_rounded,
+                          size: 30,
+                        ),
                       ),
                     ],
                   );
