@@ -51,16 +51,29 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     return Column(
                       children: [
                         profileBar(userData),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 32),
                         countNotNull / (countNotNull + countNull) == 1
-                            ? Container(
-                                width: 100,
-                                height: 30,
-                                color: Colors.green,
-                                child: InkWell(onTap: () {
+                            ? GestureDetector(
+                                onTap: () {
                                   saveReview(userData);
                                   setState(() {});
-                                }),
+                                },
+                                child: Container(
+                                  width: 320,
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: const Center(
+                                    child: Text(
+                                      'Salvar Análise',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                ),
                               )
                             : Container(
                                 width: 320,
@@ -92,6 +105,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   ],
                                 ),
                               ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         const Row(
                           children: [
                             SizedBox(

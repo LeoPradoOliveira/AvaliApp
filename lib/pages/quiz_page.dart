@@ -31,10 +31,6 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> initializeQuestions() async {
-    setState(() {
-      isLoading = true;
-    });
-
     try {
       final DocumentReference userDocRef =
           FirebaseFirestore.instance.collection("users").doc(currentUser.uid);
@@ -62,9 +58,12 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
+      return Scaffold(
+        backgroundColor: Colors.grey[300],
+        body: const SafeArea(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       );
     }

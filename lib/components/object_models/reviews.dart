@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Review {
-  final DateTime? data;
+  final DateTime data;
   final List<double> dimensoes;
 
   const Review({
@@ -11,7 +11,7 @@ class Review {
 
   Map<String, dynamic> toMap() {
     return {
-      'data': data?.toIso8601String(),
+      'data': data,
       'dimensoes': dimensoes,
     };
   }
