@@ -15,7 +15,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
   late Map<String, dynamic> userData;
   final currentUser = FirebaseAuth.instance.currentUser!;
   final usersCollection = FirebaseFirestore.instance.collection("users");
-  final List<DocumentSnapshot> reviewsDocs = [];
+  List<DocumentSnapshot> reviewsDocs = [];
   bool isLoading = true;
   List<List<RadarDataSet>> data = [];
 
@@ -66,6 +66,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
         data.add(graph);
       }
       data = data.reversed.toList();
+      reviewsDocs = reviewsDocs.reversed.toList();
 
       setState(() {
         isLoading = false;
