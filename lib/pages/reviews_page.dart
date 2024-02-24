@@ -100,7 +100,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           surfaceTintColor: Colors.transparent),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 60),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -108,7 +108,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 1,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                   ),
@@ -123,18 +123,21 @@ class _ReviewsPageState extends State<ReviewsPage> {
                     ),
                     child: Column(
                       children: [
-                        Text(DateFormat('dd/MM/yyyy').format(
-                            reviewsDocs.elementAt(index).get('data').toDate())),
+                        Text(
+                          DateFormat('dd/MM/yyyy').format(
+                            reviewsDocs.elementAt(index).get('data').toDate(),
+                          ),
+                        ),
                         const SizedBox(
-                          height: 5,
+                          height: 50,
                         ),
                         AspectRatio(
-                          aspectRatio: 1.3,
+                          aspectRatio: 2,
                           child: RadarChart(
                             swapAnimationCurve: Curves.linear,
                             RadarChartData(
                               titlePositionPercentageOffset: 0.1,
-                              titleTextStyle: const TextStyle(fontSize: 10),
+                              titleTextStyle: const TextStyle(fontSize: 12),
                               dataSets: data[index],
                               radarBackgroundColor: Colors.white,
                               radarBorderData: const BorderSide(
@@ -150,45 +153,33 @@ class _ReviewsPageState extends State<ReviewsPage> {
                                 switch (i) {
                                   case 0:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            'Ambiente\n${data[index][0].dataEntries[i].value.toStringAsFixed(2)}',
                                         angle: angle);
                                   case 1:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            'Cuidado\n${data[index][0].dataEntries[i].value.toStringAsFixed(2)}',
                                         angle: angle);
                                   case 2:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            '${data[index][0].dataEntries[i].value.toStringAsFixed(2)}\nLar',
                                         angle: 300);
                                   case 3:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            '${data[index][0].dataEntries[i].value.toStringAsFixed(2)}\nGestão',
                                         angle: 0);
                                   case 4:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            '${data[index][0].dataEntries[i].value.toStringAsFixed(2)}\nEquipe',
                                         angle: 60);
                                   case 5:
                                     return RadarChartTitle(
-                                        text: data[index][0]
-                                            .dataEntries[i]
-                                            .value
-                                            .toStringAsFixed(2),
+                                        text:
+                                            'Envolvimento\n${data[index][0].dataEntries[i].value.toStringAsFixed(2)}',
                                         angle: angle);
                                   default:
                                     return const RadarChartTitle(text: '');
@@ -201,7 +192,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),

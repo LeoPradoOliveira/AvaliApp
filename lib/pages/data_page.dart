@@ -105,7 +105,7 @@ class _DataPageState extends State<DataPage> {
                                     ],
                                   ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 10,
                                   ),
                                   const Text(
                                     "É necessário responder todas as perguntas de uma dimensão para receber uma nota.",
@@ -163,7 +163,7 @@ class _DataPageState extends State<DataPage> {
                               ),
                             ),
                       const SizedBox(
-                        height: 52.5,
+                        height: 40,
                       ),
                       AspectRatio(
                         aspectRatio: 1.5,
@@ -222,20 +222,65 @@ class _DataPageState extends State<DataPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 70,
+                        height: 50,
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ReviewsPage()),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.poll_rounded,
-                          size: 30,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ReviewsPage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 170,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[200],
+                              ),
+                              child: const Column(
+                                children: [
+                                  Text(
+                                    "Histórico de análises",
+                                  ),
+                                  Icon(
+                                    Icons.poll_rounded,
+                                    size: 30,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 170,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[200],
+                              ),
+                              child: const Column(
+                                children: [
+                                  Text(
+                                    "Gráficos de dimensões",
+                                  ),
+                                  Icon(
+                                    Icons.show_chart,
+                                    size: 30,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   );
