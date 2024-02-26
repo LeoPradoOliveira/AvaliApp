@@ -81,144 +81,161 @@ class _DataPageState extends State<DataPage> {
                   ];
 
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      notAnswered.isEmpty
-                          ? const SizedBox(
-                              child: Text(
-                                "Com todas as perguntas respondidas, a nota final da instituição foi a seguinte:",
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : SizedBox(
-                              width: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            notAnswered.isEmpty
+                                ? const Column(
                                     children: [
-                                      Icon(
-                                        Icons.info,
-                                        size: 30,
+                                      SizedBox(
+                                        height: 60,
+                                      ),
+                                      SizedBox(
+                                        child: Text(
+                                          "Com todas as perguntas respondidas, a nota final da instituição foi a seguinte:",
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text(
-                                    "É necessário responder todas as perguntas de uma dimensão para receber uma nota.",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const Text(
-                                    "As seguintes dimensões ainda possuem perguntas a serem respondidas:",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(
-                                    height: 7.5,
-                                  ),
-                                  const Divider(
-                                    thickness: 1,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 7.5,
-                                  ),
-                                  GridView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 5.0,
-                                      mainAxisSpacing: 5.0,
-                                      childAspectRatio: 10,
+                                  )
+                                : SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.info,
+                                              size: 30,
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Text(
+                                          "É necessário responder todas as perguntas de uma dimensão para receber uma nota.",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        const Text(
+                                          "As seguintes dimensões ainda possuem perguntas a serem respondidas:",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(
+                                          height: 7.5,
+                                        ),
+                                        const Divider(
+                                          thickness: 1,
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(
+                                          height: 7.5,
+                                        ),
+                                        GridView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 5.0,
+                                            mainAxisSpacing: 5.0,
+                                            childAspectRatio: 10,
+                                          ),
+                                          itemBuilder: (context, index) {
+                                            return Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  notAnswered[index],
+                                                )
+                                              ],
+                                            );
+                                          },
+                                          itemCount: notAnswered.length,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Divider(
+                                          thickness: 1,
+                                          color: Colors.white,
+                                        ),
+                                      ],
                                     ),
-                                    itemBuilder: (context, index) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            notAnswered[index],
-                                          )
-                                        ],
-                                      );
-                                    },
-                                    itemCount: notAnswered.length,
                                   ),
-                                  const SizedBox(
-                                    height: 10,
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            AspectRatio(
+                              aspectRatio: 1.5,
+                              child: RadarChart(
+                                swapAnimationCurve: Curves.linear,
+                                RadarChartData(
+                                  titlePositionPercentageOffset: 0.1,
+                                  dataSets: data,
+                                  radarBackgroundColor: Colors.white,
+                                  radarBorderData: const BorderSide(
+                                    width: 0,
                                   ),
-                                  const Divider(
-                                    thickness: 1,
-                                    color: Colors.white,
-                                  ),
-                                ],
+                                  tickCount: 4,
+                                  tickBorderData: const BorderSide(
+                                      width: 1,
+                                      color:
+                                          Color.fromARGB(255, 160, 160, 160)),
+                                  ticksTextStyle:
+                                      (const TextStyle(fontSize: 0)),
+                                  radarShape: RadarShape.polygon,
+                                  getTitle: (index, angle) {
+                                    switch (index) {
+                                      case 0:
+                                        return RadarChartTitle(
+                                            text:
+                                                'Ambiente\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
+                                            angle: angle);
+                                      case 1:
+                                        return RadarChartTitle(
+                                            text:
+                                                'Cuidado\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
+                                            angle: angle);
+                                      case 2:
+                                        return RadarChartTitle(
+                                            text:
+                                                '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nLar',
+                                            angle: 300);
+                                      case 3:
+                                        return RadarChartTitle(
+                                            text:
+                                                '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nGestão',
+                                            angle: 0);
+                                      case 4:
+                                        return RadarChartTitle(
+                                            text:
+                                                '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nEquipe',
+                                            angle: 60);
+                                      case 5:
+                                        return RadarChartTitle(
+                                            text:
+                                                'Envolvimento\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
+                                            angle: angle);
+                                      default:
+                                        return const RadarChartTitle(text: '');
+                                    }
+                                  },
+                                ),
                               ),
                             ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1.5,
-                        child: RadarChart(
-                          swapAnimationCurve: Curves.linear,
-                          RadarChartData(
-                            titlePositionPercentageOffset: 0.1,
-                            dataSets: data,
-                            radarBackgroundColor: Colors.white,
-                            radarBorderData: const BorderSide(
-                              width: 0,
-                            ),
-                            tickCount: 4,
-                            tickBorderData: const BorderSide(
-                                width: 1,
-                                color: Color.fromARGB(255, 160, 160, 160)),
-                            ticksTextStyle: (const TextStyle(fontSize: 0)),
-                            radarShape: RadarShape.polygon,
-                            getTitle: (index, angle) {
-                              switch (index) {
-                                case 0:
-                                  return RadarChartTitle(
-                                      text:
-                                          'Ambiente\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
-                                      angle: angle);
-                                case 1:
-                                  return RadarChartTitle(
-                                      text:
-                                          'Cuidado\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
-                                      angle: angle);
-                                case 2:
-                                  return RadarChartTitle(
-                                      text:
-                                          '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nLar',
-                                      angle: 300);
-                                case 3:
-                                  return RadarChartTitle(
-                                      text:
-                                          '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nGestão',
-                                      angle: 0);
-                                case 4:
-                                  return RadarChartTitle(
-                                      text:
-                                          '${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}\nEquipe',
-                                      angle: 60);
-                                case 5:
-                                  return RadarChartTitle(
-                                      text:
-                                          'Envolvimento\n${double.parse(data.first.dataEntries[index].value.toStringAsFixed(2))}',
-                                      angle: angle);
-                                default:
-                                  return const RadarChartTitle(text: '');
-                              }
-                            },
-                          ),
+                          ],
                         ),
                       ),
                       const SizedBox(
